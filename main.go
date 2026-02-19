@@ -7,6 +7,7 @@ import (
 	"koda-b6-golang/utils"
 	"net/http"
 	"os"
+	"strings"
 )
 
 var foodList []utils.Food
@@ -32,6 +33,73 @@ func loadData(){
 	}
 }
 
+func searchFood(){
+	fmt.Print("Cari Nama Makanan: ")
+	var key string
+	fmt.Scanln(&key)
+
+	fmt.Println("\n--- Hasil Pencarian ---")
+	for _, f := range foodList {
+		if strings.Contains(strings.ToLower(f.NamaMakanan), strings.ToLower(key)) {
+			fmt.Printf("ID: %d | %s\n", f.ID, f.NamaMakanan)
+		}
+	}
+}
+
+func orderFood() {
+	fmt.Println("\n--- Pilih Menu ---")
+	for _, f := range foodList {
+		fmt.Printf("%d. %s\n", f.ID, f.NamaMakanan)
+	}
+
+	fmt.Print("Masukkan ID: ")
+	var id int
+	fmt.Scanln(&id)
+
+	var selected *utils.Food 
+	for i := range foodList {
+		if foodList[i].ID == id {
+			selected = &foodList[i]
+			break
+		}
+	}
+
+	if selected == nil {
+		fmt.Println("Menu tidak ditemukan.")
+		return
+	}
+
+	options := make([]string, 0, len(selected.Pilihan))
+	for k := range selected.Pilihan {
+		options = append(options, k)
+	}
+
+	for i, key := range options {
+		fmt.Printf("%d. %s (Rp%d)\n", i+1, selected.Pilihan[key], selected.HargaMakanan[key])
+	}
+
+	fmt.Print("Pilih Opsi (angka): ")
+	var optIdx int
+	fmt.Scanln(&optIdx)
+
+	if optIdx < 1 || optIdx > len(options) {
+		fmt.Println("Opsi tidak tersedia.")
+		return
+	}
+
+	keyChosen := options[optIdx-1]
+	fmt.Print("Jumlah: ")
+	var qty int
+	fmt.Scanln(&qty)
+
+	service.AddToCart(utils.CartItem{
+		Nama:  selected.NamaMakanan,
+		Opsi:  selected.Pilihan[keyChosen],
+		Harga: selected.HargaMakanan[keyChosen],
+		Qty:   qty,
+	})
+}
+
 func main(){
-	
+
 }
