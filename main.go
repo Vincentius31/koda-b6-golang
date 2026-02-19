@@ -69,35 +69,54 @@ func orderFood() {
 		return
 	}
 
-	options := make([]string, 0, len(selected.Pilihan))
-	for k := range selected.Pilihan {
-		options = append(options, k)
+	choices := make([]string, 0, len(selected.Pilihan))
+	for i := 1; i <= len(selected.Pilihan); i++ {
+		key := fmt.Sprintf("opsi%d", i)
+		choices = append(choices, key)
 	}
 
-	for i, key := range options {
-		fmt.Printf("%d. %s (Rp%d)\n", i+1, selected.Pilihan[key], selected.HargaMakanan[key])
+	fmt.Println("\nPilihan Variasi:")
+	for i, key := range choices {
+		priceKey := "harga" + strings.Title(key) 
+		
+		label := selected.Pilihan[key]
+		harga := selected.HargaMakanan[priceKey]
+		fmt.Printf("%d. %s (Rp%d)\n", i+1, label, harga)
 	}
 
-	fmt.Print("Pilih Opsi (angka): ")
+	fmt.Print("Pilih nomor variasi: ")
 	var optIdx int
 	fmt.Scanln(&optIdx)
 
-	if optIdx < 1 || optIdx > len(options) {
+	if optIdx < 1 || optIdx > len(choices) {
 		fmt.Println("Opsi tidak tersedia.")
 		return
 	}
 
-	keyChosen := options[optIdx-1]
-	fmt.Print("Jumlah: ")
+	finalKey := choices[optIdx-1]
+	finalPriceKey := "harga" + strings.Title(finalKey)
+	
+	finalLabel := selected.Pilihan[finalKey]
+	finalHarga := selected.HargaMakanan[finalPriceKey]
+
+	fmt.Printf("Harga satuan: Rp%d\n", finalHarga)
+	fmt.Print("Jumlah (Qty): ")
 	var qty int
 	fmt.Scanln(&qty)
 
+	if qty <= 0 {
+		fmt.Println("Jumlah minimal 1.")
+		return
+	}
+
 	service.AddToCart(utils.CartItem{
 		Nama:  selected.NamaMakanan,
-		Opsi:  selected.Pilihan[keyChosen],
-		Harga: selected.HargaMakanan[keyChosen],
+		Opsi:  finalLabel,
+		Harga: finalHarga,
 		Qty:   qty,
 	})
+
+	fmt.Printf("✅ %d %s (%s) masuk keranjang!\n", qty, selected.NamaMakanan, finalLabel)
 }
 
 func main() {
@@ -107,7 +126,7 @@ func main() {
 		fmt.Println("\n========== GOLANG FOOD APP ==========")
 		fmt.Println("1. Cari Makanan")
 		fmt.Println("2. Tambah ke Keranjang")
-		fmt.Println("3. Checkout (Async)")
+		fmt.Println("3. Checkout")
 		fmt.Println("4. History Transaksi")
 		fmt.Println("5. Keluar")
 		fmt.Print("Pilihan: ")
@@ -121,7 +140,7 @@ func main() {
 		case 2:
 			orderFood()
 		case 3:
-			done := make(chan bool)   
+			done := make(chan bool)
 			go service.Checkout(done)
 			<-done
 		case 4:
