@@ -13,8 +13,8 @@ import (
 var foodList []utils.Food
 var service = services.FoodService{}
 
-func loadData(){
-	defer func(){
+func loadData() {
+	defer func() {
 		if r := recover(); r != nil {
 			fmt.Printf("Error fatal: %v\n", r)
 			os.Exit(1)
@@ -33,7 +33,7 @@ func loadData(){
 	}
 }
 
-func searchFood(){
+func searchFood() {
 	fmt.Print("Cari Nama Makanan: ")
 	var key string
 	fmt.Scanln(&key)
@@ -56,7 +56,7 @@ func orderFood() {
 	var id int
 	fmt.Scanln(&id)
 
-	var selected *utils.Food 
+	var selected *utils.Food
 	for i := range foodList {
 		if foodList[i].ID == id {
 			selected = &foodList[i]
@@ -100,6 +100,45 @@ func orderFood() {
 	})
 }
 
-func main(){
+func main() {
+	loadData()
 
+	for {
+		fmt.Println("\n========== GOLANG FOOD APP ==========")
+		fmt.Println("1. Cari Makanan")
+		fmt.Println("2. Tambah ke Keranjang")
+		fmt.Println("3. Checkout (Async)")
+		fmt.Println("4. History Transaksi")
+		fmt.Println("5. Keluar")
+		fmt.Print("Pilihan: ")
+
+		var choice int
+		fmt.Scanln(&choice)
+
+		switch choice {
+		case 1:
+			searchFood()
+		case 2:
+			orderFood()
+		case 3:
+			done := make(chan bool)   
+			go service.Checkout(done)
+			<-done
+		case 4:
+			showHistory()
+		case 5:
+			fmt.Println("Sampai jumpa!")
+			return
+		}
+	}
+}
+
+func showHistory() {
+	if len(service.History) == 0 {
+		fmt.Println("Belum ada riwayat.")
+		return
+	}
+	for _, h := range service.History {
+		fmt.Printf("[%s] Total: Rp%d\n", h.Tanggal, h.Total)
+	}
 }
