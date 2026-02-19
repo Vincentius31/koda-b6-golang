@@ -1,0 +1,154 @@
+[
+    {
+        "id": 1,
+        "namaMakanan": "Iga Bakar Sapi",
+        "jenis": "Makanan",
+        "stok": 12,
+        "pilihan":{
+            "opsi1": "Jadikan Paket",
+            "opsi2": "Tidak Jadikan Paket"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 68000,
+            "hargaOpsi2": 48000
+        }
+    },
+
+    {
+        "id": 2,
+        "namaMakanan": "Iga Bakar Kambing",
+        "jenis": "Makanan",
+        "stok": 50,
+        "pilihan":{
+            "opsi1": "Jadikan Paket",
+            "opsi2": "Tidak Jadikan Paket"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 75000,
+            "hargaOpsi2": 60000
+        }
+    },
+
+    {
+        "id": 3,
+        "namaMakanan": "Sop Iga Bakar",
+        "jenis": "Makanan",
+        "stok": 10,
+        "pilihan":{
+            "opsi1": "Tidak Ada Opsi"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 48000
+        } 
+    },
+
+    {
+        "id": 4,
+        "namaMakanan": "Kresengan",
+        "jenis": "Makanan",
+        "stok": 50,
+        "pilihan":{
+            "opsi1": "Ayam",
+            "opsi2": "Sapi",
+            "opsi3": "Kambing"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1":48000,
+            "hargaOpsi2":60000,
+            "hargaOpsi3":66000
+        }
+    },
+
+    {
+        "id": 5,
+        "namaMakanan": "Nasi Goreng",
+        "jenis": "Makanan",
+        "stok": 90,
+        "pilihan":{
+            "opsi1": "Ayam",
+            "opsi2": "Sapi",
+            "opsi3": "Kambing",
+            "opsi4": "Iga"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 48000,
+            "hargaOpsi2": 48000,
+            "hargaOpsi3": 48000,
+            "hargaOpsi4": 60000
+        }
+    },
+
+    {
+        "id": 6,
+        "namaMakanan": "Mie Kocok",
+        "jenis": "Makanan",
+        "stok": 90,
+        "pilihan":{
+            "opsi1": "Polos",
+            "opsi2": "Biasa",
+            "opsi3": "Spesial"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 24000,
+            "hargaOpsi2": 36000,
+            "hargaOpsi3": 48000
+        }
+    },
+
+    {
+        "id": 7,
+        "namaMakanan": "Tengkleng",
+        "jenis": "Makanan",
+        "stok": 90,
+        "pilihan":{
+            "opsi1": "Sapi",
+            "opsi2": "Kambing"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1":66000,
+            "hargaOpsi2":66000
+        }
+    },
+
+    {
+        "id": 8,
+        "namaMakanan": "Nasi Putih",
+        "jenis": "Makanan",
+        "stok": 75,
+        "pilihan":{
+            "opsi1":"Tidak Ada Opsi"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 8400
+        } 
+    },
+
+    {
+        "id": 9,
+        "namaMakanan": "Kerupuk",
+        "jenis": "Makanan",
+        "stok": 500,
+        "pilihan":{
+            "opsi1":"Tidak Ada Opsi"  
+        },
+        "hargaMakanan":{
+            "hargaOpsi1": 8400
+        } 
+    },
+
+    {
+        "id": 10,
+        "namaMakanan": "Teh Manis",
+        "jenis": "Minuman",
+        "stok": 100,
+        "pilihan":{
+            "opsi1": "Manis",
+            "opsi2": "Tawar"
+        },
+        "hargaMakanan":{
+            "hargaOpsi1":12000,
+            "hargaOpsi2":12000
+        }
+    }
+
+]
